@@ -1,0 +1,11 @@
+STORY: Returns go back to the stockpile
+
+As a store owner, in order to keep track of stock, I want to add items back to stock when they're returned.
+
+SCENARIO: test
+   GIVEN that a customer previously bought a black sweater from me
+     AND I have three black sweaters in stock
+    WHEN the customer returns the black sweater for a refund
+    THEN I should have four black sweaters in stock
+     AND nothing
+
