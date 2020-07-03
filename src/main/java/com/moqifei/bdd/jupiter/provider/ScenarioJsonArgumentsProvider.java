@@ -20,6 +20,7 @@ import org.junit.platform.commons.util.ReflectionUtils;
 import com.alibaba.fastjson.JSON;
 import com.google.common.io.CharStreams;
 import com.moqifei.bdd.jupiter.extension.Scene;
+import com.moqifei.bdd.jupiter.modle.annotations.ScenarioJsonSource;
 
 public class ScenarioJsonArgumentsProvider implements ArgumentsProvider, AnnotationConsumer<ScenarioJsonSource> {
 

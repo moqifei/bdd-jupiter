@@ -40,7 +40,8 @@ public class Scene {
 
 	private String methodName;
 	private String description;
-
+	private String runResult;
+	
 	private Phase current;
 
 	private GivenPhase givenPhase;
@@ -80,6 +81,14 @@ public class Scene {
 	Scene setDescription(String description) {
 		this.description = description;
 		return this;
+	}
+
+	public String getRunResult() {
+		return runResult;
+	}
+
+	public void setRunResult(String runResult) {
+		this.runResult = runResult;
 	}
 
 	public Scene given(String description, Given given) {

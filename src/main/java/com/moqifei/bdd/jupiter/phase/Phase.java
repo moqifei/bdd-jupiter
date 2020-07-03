@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * Represents a phase in a scene - {@link Given}, {@link When}, {@link Then}.
- * Optionally, a phase holds additional "and" conditions.
+ * Optionally, a phase can holds subPhase such as additional "and" conditions etc.
  */
 public abstract class Phase implements Divisible{
     private String description;
@@ -43,20 +43,4 @@ public abstract class Phase implements Divisible{
     public List<SubPhase> geSubPhases() {
         return subPhases;
     }
-
-//    /**
-//     * Represents an "and" condition that is part of a {@link Given} or {@link Then} phase in a scene.
-//     */
-//    public static class AndSubPhase extends Phase {
-//        private And and;
-//
-//        public AndSubPhase(String description, And and) {
-//            super(description);
-//            this.and = and;
-//        }
-//
-//        public And getAnd() {
-//            return and;
-//        }
-//    }
 }

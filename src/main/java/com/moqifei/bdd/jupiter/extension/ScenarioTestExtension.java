@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestTemplateInvocationContext;
 import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
@@ -19,13 +18,13 @@ import org.junit.platform.commons.util.ExceptionUtils;
 import org.junit.platform.commons.util.Preconditions;
 import org.junit.platform.commons.util.ReflectionUtils;
 
-import com.moqifei.bdd.jupiter.modle.ScenarioTest;
+import com.moqifei.bdd.jupiter.modle.annotations.ScenarioTest;
 
 import static org.junit.platform.commons.util.AnnotationUtils.findAnnotation;
 import static org.junit.platform.commons.util.AnnotationUtils.findRepeatableAnnotations;
 import static org.junit.platform.commons.util.AnnotationUtils.isAnnotated;
 
-public class ScenarioTestExtension implements TestTemplateInvocationContextProvider, AfterTestExecutionCallback {
+public class ScenarioTestExtension implements TestTemplateInvocationContextProvider {
 
 	private static final String METHOD_CONTEXT_KEY = "context";
 	
@@ -124,12 +123,5 @@ public class ScenarioTestExtension implements TestTemplateInvocationContextProvi
 		return methodContext.hasAggregator() ? arguments
 				: (arguments.length > parameterCount ? Arrays.copyOf(arguments, parameterCount) : arguments);
 	}
-
-	@Override
-	public void afterTestExecution(ExtensionContext context) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
 	
 }

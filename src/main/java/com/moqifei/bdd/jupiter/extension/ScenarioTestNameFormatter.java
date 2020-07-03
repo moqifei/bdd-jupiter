@@ -1,9 +1,9 @@
 package com.moqifei.bdd.jupiter.extension;
 
+import static com.moqifei.bdd.jupiter.modle.annotations.ScenarioTest.ARGUMENTS_PLACEHOLDER;
+import static com.moqifei.bdd.jupiter.modle.annotations.ScenarioTest.DISPLAY_NAME_PLACEHOLDER;
+import static com.moqifei.bdd.jupiter.modle.annotations.ScenarioTest.INDEX_PLACEHOLDER;
 import static java.util.stream.Collectors.joining;
-import static com.moqifei.bdd.jupiter.modle.ScenarioTest.ARGUMENTS_PLACEHOLDER;
-import static com.moqifei.bdd.jupiter.modle.ScenarioTest.DISPLAY_NAME_PLACEHOLDER;
-import static com.moqifei.bdd.jupiter.modle.ScenarioTest.INDEX_PLACEHOLDER;
 
 import java.text.Format;
 import java.text.MessageFormat;

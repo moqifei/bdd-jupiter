@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.moqifei.bdd.jupiter.modle;
+package com.moqifei.bdd.jupiter.modle.annotations;
 
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.moqifei.bdd.jupiter.extension.ScenarioTestExtension;
-
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -29,6 +28,14 @@ import java.lang.annotation.Target;
 
 /**
  * Represents a use case in a {@link Story}.
+ * 
+ * {@code @ScenarioTest} is used to signal that the annotated method is a
+ * <em>Scenario test of BDD story</em> method.
+ *
+ * <p>Such methods must not be {@code private} or {@code static}.
+ * 
+ * In addition, {@code @ScenarioTest} wraps up @ParameterizedTest ability, which means you can use @ValueSource, 
+ * @MethodSource, @CsvSource etc with {@code @ScenarioTest}
  */
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)

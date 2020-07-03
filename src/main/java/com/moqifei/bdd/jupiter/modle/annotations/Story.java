@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.moqifei.bdd.jupiter.modle;
+package com.moqifei.bdd.jupiter.modle.annotations;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.commons.annotation.Testable;

@@ -13,6 +13,7 @@ import org.junit.platform.commons.JUnitException;
 import org.junit.platform.commons.util.ReflectionUtils;
 
 import com.moqifei.bdd.jupiter.extension.Scene;
+import com.moqifei.bdd.jupiter.modle.annotations.ScenarioSource;
 
 public class ScenarioArgumentsProvider implements ArgumentsProvider, AnnotationConsumer<ScenarioSource> {
 

@@ -5,7 +5,7 @@
 
 	<groupId>com.moqifei.bdd.jupiter</groupId>
 	<artifactId>bdd-jupiter</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0-GA</version>
 	<packaging>jar</packaging>
 
 	<name>bdd-jupiter</name>
@@ -26,6 +26,77 @@
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.2</version>
+			</plugin>
+			<plugin>
+				<groupId>com.moqifei.bdd.jupiter</groupId>
+				<artifactId>bdd-jupiter-generator-maven-plugin</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+				<configuration>
+					<!-- 指定配置文件的位置 -->
+					<configurationFile>${basedir}/src/main/java/com/moqifei/bdd/jupiter/writer/test</configurationFile>
+					<golablGeneratorMode>PoJo</golablGeneratorMode>
+					<generatorConfigs>
+					  <generatorConfig
+							implementation="com.moqifei.bdd.jupiter.generate.source.model.GeneratorConfig">
+							<generatorMode>SpringBoot</generatorMode>
+							<fullFileName>SkipClass.java</fullFileName>
+							<skipFlag>all</skipFlag>
+						</generatorConfig>
+						<generatorConfig
+							implementation="com.moqifei.bdd.jupiter.generate.source.model.GeneratorConfig">
+							<generatorMode>SpringBoot</generatorMode>
+							<fullFileName>SpringBootClass.java</fullFileName>
+							<skipFlag>none</skipFlag>
+						</generatorConfig>
+						<generatorConfig
+							implementation="com.moqifei.bdd.jupiter.generate.source.model.GeneratorConfig">
+							<generatorMode>Spring</generatorMode>
+							<fullFileName>SpringClass.java</fullFileName>
+							<skipFlag>none</skipFlag>
+						</generatorConfig>
+						<generatorConfig
+							implementation="com.moqifei.bdd.jupiter.generate.source.model.GeneratorConfig">
+							<generatorMode>PoJo</generatorMode>
+							<fullFileName>PoJoClass.java</fullFileName>
+							<skipFlag>partial</skipFlag>
+							<methodLists>
+								<methodList>testReduce</methodList>
+							</methodLists>
+						</generatorConfig>
+					</generatorConfigs>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.github.javaparser</groupId>
+						<artifactId>javaparser-core</artifactId>
+						<version>3.6.5</version>
+					</dependency>
+					<dependency>
+						<groupId>com.athaydes.osgiaas</groupId>
+						<artifactId>osgiaas-javac</artifactId>
+						<version>0.7</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.commons</groupId>
+						<artifactId>commons-lang3</artifactId>
+						<version>3.10</version>
+					</dependency>
+					<dependency>
+						<groupId>org.projectlombok</groupId>
+						<artifactId>lombok</artifactId>
+						<version>1.18.12</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.commons</groupId>
+						<artifactId>commons-collections4</artifactId>
+						<version>4.4</version>
+					</dependency>
+					<dependency>
+						<groupId>com.google.guava</groupId>
+						<artifactId>guava</artifactId>
+						<version>23.0</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,4 +1,4 @@
-package com.moqifei.bdd.jupiter.provider;
+package com.moqifei.bdd.jupiter.modle.annotations;
 
 import static org.apiguardian.api.API.Status.EXPERIMENTAL;
 
@@ -12,6 +12,7 @@ import org.apiguardian.api.API;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import com.moqifei.bdd.jupiter.extension.Scene;
+import com.moqifei.bdd.jupiter.provider.ScenarioJsonArgumentsProvider;
 
 @Target({ ElementType.ANNOTATION_TYPE, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)

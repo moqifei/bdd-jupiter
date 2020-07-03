@@ -17,7 +17,7 @@
 package com.moqifei.bdd.jupiter.modle;
 
 /**
- * Represents additional conditions or behaviors in a scene.
+ * Represents AND conditions or behaviors in a scene.
  */
 @FunctionalInterface
 public interface And extends Condition{

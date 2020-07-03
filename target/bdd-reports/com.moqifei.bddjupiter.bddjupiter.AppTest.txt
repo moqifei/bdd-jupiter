@@ -8,4 +8,13 @@ SCENARIO: test
     WHEN the customer returns the black sweater for a refund
     THEN I should have four black sweaters in stock
      AND nothing
+     RUN succeed
+
+SCENARIO: test1
+   GIVEN that a customer previously bought a black sweater from me
+     AND I have three black sweaters in stock
+    WHEN the customer returns the black sweater for a refund
+    THEN I should have four black sweaters in stock
+     AND nothing
+     RUN succeed
 

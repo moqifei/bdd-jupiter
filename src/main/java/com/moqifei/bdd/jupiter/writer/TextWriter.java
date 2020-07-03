@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
+import org.mockito.Mock;
+
 import com.moqifei.bdd.jupiter.json.Constants;
 import com.moqifei.bdd.jupiter.json.JSONArray;
 import com.moqifei.bdd.jupiter.json.Json;
@@ -37,8 +39,18 @@ class TextWriter {
     private static final String WHEN = "    WHEN ";
     private static final String THEN = "    THEN ";
     private static final String AND = "     AND ";
+    private static final String RUN_RESULT = "     RUN ";
 
     private static final String LF = "\n";
+    
+//    @Mock
+//    private PoJoTest test;
+//    
+//    public void testMethod() {
+//    	int a = test.testAdd(1, test.testReduce(2, test.testReduce(3,4)));
+//    	
+//    	int b = test.testReduce(1, 2);
+//    }
 
     void write(Json report, File bddReports) throws Exception {
         File classFile = createFile(bddReports, report.str(Constants.CLASS_NAME));
@@ -81,6 +93,12 @@ class TextWriter {
                 if (then.containsKey(Constants.ANDS)) {
                     printAnds(then.val(Constants.ANDS), writer);
                 }
+                
+                if (scenario.containsKey(Constants.RUN_RESULT)) {
+                	String result = scenario.val(Constants.RUN_RESULT);
+                    writer.write(RUN_RESULT +result + LF);
+                }
+
 
                 writer.write(LF);
             }

@@ -58,6 +58,8 @@ class StoryWriter extends BasicStoryWriter {
             addAnds(scene.thenAnds(), then);
 
             scenario.put(Constants.THEN, then);
+            
+            scenario.put(Constants.RUN_RESULT, scene.getRunResult());
 
             scenarios.add(scenario);
         }

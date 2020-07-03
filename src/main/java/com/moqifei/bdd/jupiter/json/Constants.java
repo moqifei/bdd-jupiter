@@ -34,6 +34,8 @@ public class Constants {
     public static final String WHEN = "when";
     public static final String THEN = "then";
     public static final String ANDS = "ands";
+    
+    public static final String RUN_RESULT = "run_result";
 
     public static final String SUCCESS = "success";
 

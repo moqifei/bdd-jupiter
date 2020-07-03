@@ -2,17 +2,19 @@ package com.moqifei.bdd.jupiter.extension;
 
 import java.lang.reflect.Executable;
 import java.lang.reflect.Method;
+import java.util.Optional;
 
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
+import org.junit.jupiter.api.extension.TestWatcher;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 
-import com.moqifei.bdd.jupiter.modle.ScenarioTest;
 import com.moqifei.bdd.jupiter.modle.StoryDetails;
+import com.moqifei.bdd.jupiter.modle.annotations.ScenarioTest;
 
-public class ScenarioTestParameterResolver implements ParameterResolver {
+public class ScenarioTestParameterResolver implements ParameterResolver, TestWatcher {
 
 	private static final Namespace NAMESPACE = Namespace.create(StoryExtension.class);
 
@@ -70,4 +72,33 @@ public class ScenarioTestParameterResolver implements ParameterResolver {
 		return context.getStore(NAMESPACE).get(clazz.getName(), StoryDetails.class);
 	}
 
+	@Override
+    public void testAborted(ExtensionContext extensionContext, Throwable throwable) {
+        // do something
+    }
+
+    @Override
+    public void testDisabled(ExtensionContext extensionContext, Optional<String> optional) {
+    	// do something
+    }
+
+    @Override
+    public void testFailed(ExtensionContext extensionContext, Throwable throwable) {
+    	
+    	Class<?> clazz = extensionContext.getRequiredTestClass();
+    	StoryDetails storyDetails = extensionContext.getStore(NAMESPACE).get(clazz.getName(), StoryDetails.class);
+    	Scene scene = (Scene) storyDetails.getStore().get(extensionContext.getRequiredTestMethod().getName());
+    	scene.setRunResult("failed");
+    	getStoryDetails(extensionContext).getStore().put(scene.getMethodName(), scene);
+    }
+
+    @Override
+    public void testSuccessful(ExtensionContext extensionContext) {
+    	
+    	Class<?> clazz = extensionContext.getRequiredTestClass();
+    	StoryDetails storyDetails = extensionContext.getStore(NAMESPACE).get(clazz.getName(), StoryDetails.class);
+    	Scene scene = (Scene) storyDetails.getStore().get(extensionContext.getRequiredTestMethod().getName());
+    	scene.setRunResult("succeed");
+    	getStoryDetails(extensionContext).getStore().put(scene.getMethodName(), scene);
+    }
 }

@@ -29,6 +29,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.mockito.Mock;
+
 import com.moqifei.bdd.jupiter.json.Constants;
 import com.moqifei.bdd.jupiter.json.JSONArray;
 import com.moqifei.bdd.jupiter.json.JSONObject;
@@ -36,6 +38,15 @@ import com.moqifei.bdd.jupiter.json.Json;
 import com.moqifei.bdd.jupiter.modle.StoryDetails;
 
 public abstract class BasicStoryWriter {
+	
+//    @Mock
+//    private PoJoTest test;
+//    
+//    public void testMethod() {
+//    	int a = test.testAdd(1, test.testReduce(2, test.testReduce(3,4)));
+//    	
+//    	int b = test.testReduce(1, 2);
+//    }
 
     /**
      * Facilitates the clean-up and creation of {@link Constants#BDD_REPORTS_FOLDER} folder
