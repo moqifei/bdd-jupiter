@@ -41,7 +41,8 @@ public class Scene {
 	private String methodName;
 	private String description;
 	private String runResult;
-	
+	private String key;
+
 	private Phase current;
 
 	private GivenPhase givenPhase;
@@ -65,8 +66,16 @@ public class Scene {
 		return state.val(key);
 	}
 
-	String getMethodName() {
+	public String getMethodName() {
 		return methodName;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 	Scene setMethodName(String methodName) {
@@ -164,23 +173,23 @@ public class Scene {
 		return this;
 	}
 
-	String given() {
+	public String given() {
 		return givenPhase != null ? givenPhase.getDescription() : EMPTY;
 	}
 
-	List<String> givenAnds() {
+	public List<String> givenAnds() {
 		return phaseAnds(givenPhase);
 	}
 
-	String when() {
+	public String when() {
 		return whenPhase != null ? whenPhase.getDescription() : EMPTY;
 	}
 
-	String then() {
+	public String then() {
 		return thenPhase != null ? thenPhase.getDescription() : EMPTY;
 	}
 
-	List<String> thenAnds() {
+	public List<String> thenAnds() {
 		return phaseAnds(thenPhase);
 	}
 

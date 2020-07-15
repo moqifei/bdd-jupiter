@@ -12,6 +12,8 @@ target/maven-status
 target/surefire-reports
 target/*.jar
 target/test-classes
+target/file
+target/bdd-reports
 doc/
 *.iml
 .checkstyle

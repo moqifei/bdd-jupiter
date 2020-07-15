@@ -1,0 +1,101 @@
+# ##################################################
+# testframe 测试框架文件
+# ##################################################
+
+testframe:
+  # pdf 配置
+  pdf:
+    # logo
+    logo: classpath:/images/sysicon/logo.jpg
+    # 公司名称
+    companyName: 公司名称XXX
+    # 标题
+    title: 我是标题XXX
+    # 测试部门
+    department: XXX部门
+    # 测试人员
+    person: 小T
+    # 文件根路径
+    rootPath: .
+    # 条形码类型
+    codeType:
+    # 条形码数据信息
+    codeData:
+    # 文档密码
+    password:
+    # 文件名前缀
+    fileNamePrefix:
+    # ExecuteState :true 文本显示, false 图片
+    isExecuteStateText:
+    # 发布版本环境
+    environment:
+    # 版本号
+    version:
+    # 使用用户定义条形码数据
+    isUserCodeData:
+    # 二维码配置信息
+    qrcode:
+      # 二维码外边距
+      margin:
+      # 二维码内边距
+      padding:
+      # 二维码边框大小
+      borderSize:
+      # 边线半径
+      borderRadius: 0
+      #边线颜色 颜色加[']单引号
+      borderColor:
+      # 边框样式
+      # SOLID 直线
+      # DASHED 虚线
+      borderStyle:
+      # 虚线间隔
+      borderDashGranularity:
+      # 主色调
+      masterColor:
+      # 码眼边框颜色
+      codeEyesBorderColor:
+      # 二维码码眼点颜色
+      codeEyesPointColor:
+      # 二维码码眼样式
+      # R_BORDER_R_POINT 带矩形点的矩形边框。
+      # R_BORDER_C_POINT 带圆点的矩形边框。
+      # C_BORDER_R_POINT 带矩形点的圆形边框。
+      # C_BORDER_C_POINT 带圆点的圆边界。
+      # R2_BORDER_R_POINT 带矩形点的圆角矩形边框。
+      # R2_BORDER_C_POINT 带圆点的圆角矩形边框。
+      # DR2_BORDER_R_POINT 带矩形点的对角圆角矩形边框。
+      # DR2_BORDER_C_POINT 带圆点的对角圆角矩形边框。
+      codeEyesFormat:
+      # 条码/二维码宽度 超出范围默认宽度
+      width:
+      # 二维码中心logo
+      logo:
+        # 路径
+        path:
+        # logo比例 调整logo 大小
+        ratio: 8
+        # 宽度圆角
+        arcWidth: 0
+        # 高度圆角
+        arcHeight: 0
+        # 边框大小
+        borderSize: 1
+        # 内边距
+        padding: 1
+        # 边框颜色
+        borderColor:
+        # 背景颜色
+        backgroundColor:
+        # 外边距
+        margin: 1
+        # 容器颜色
+        panelColor:
+        # 容器宽度圆角
+        panelArcWidth: 0
+        # 容器高度圆角
+        panelArcHeight: 0
+        # LOGO 类型
+        # CIRCLE 圆形
+        # RECTANGLE 方形
+        logoShape:

@@ -27,6 +27,8 @@ import com.moqifei.bdd.jupiter.modle.annotations.Story;
 
 import static org.junit.platform.commons.support.AnnotationSupport.isAnnotated;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -58,7 +60,7 @@ public class StoryExtension implements BeforeAllCallback, AfterAllCallback{
 	public void afterAll(ExtensionContext context) throws Exception {
 		if (!isStory(context))
 			return;
-
+		
 		new StoryWriter(getStoryDetails(context)).write();
 	}
 

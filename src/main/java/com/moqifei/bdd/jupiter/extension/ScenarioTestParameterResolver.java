@@ -2,26 +2,27 @@ package com.moqifei.bdd.jupiter.extension;
 
 import java.lang.reflect.Executable;
 import java.lang.reflect.Method;
-import java.util.Optional;
 
+import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
-import org.junit.jupiter.api.extension.TestWatcher;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 
+import com.google.common.eventbus.EventBus;
 import com.moqifei.bdd.jupiter.modle.StoryDetails;
 import com.moqifei.bdd.jupiter.modle.annotations.ScenarioTest;
+import com.moqifei.bdd.jupiter.report.multiple.JUnitPlatformRunnerListener;
 
-public class ScenarioTestParameterResolver implements ParameterResolver, TestWatcher {
+public class ScenarioTestParameterResolver implements ParameterResolver, AfterEachCallback {
 
 	private static final Namespace NAMESPACE = Namespace.create(StoryExtension.class);
 
 	private final ScenarioTestMethodContext methodContext;
 	private final Object[] arguments;
 
-	ScenarioTestParameterResolver(ScenarioTestMethodContext methodContext, Object[] arguments) {
+	protected ScenarioTestParameterResolver(ScenarioTestMethodContext methodContext, Object[] arguments) {
 		this.methodContext = methodContext;
 		this.arguments = arguments;
 	}
@@ -61,7 +62,7 @@ public class ScenarioTestParameterResolver implements ParameterResolver, TestWat
 			scene.setMethodName(extensionContext.getRequiredTestMethod().getName())
 					.setDescription(extensionContext.getRequiredTestMethod().getAnnotation(ScenarioTest.class).value());
 			getStoryDetails(extensionContext).getStore().put(scene.getMethodName(), scene);
-
+			
 		}
 
 		return injectParameter;
@@ -73,32 +74,16 @@ public class ScenarioTestParameterResolver implements ParameterResolver, TestWat
 	}
 
 	@Override
-    public void testAborted(ExtensionContext extensionContext, Throwable throwable) {
-        // do something
-    }
-
-    @Override
-    public void testDisabled(ExtensionContext extensionContext, Optional<String> optional) {
-    	// do something
-    }
-
-    @Override
-    public void testFailed(ExtensionContext extensionContext, Throwable throwable) {
-    	
-    	Class<?> clazz = extensionContext.getRequiredTestClass();
-    	StoryDetails storyDetails = extensionContext.getStore(NAMESPACE).get(clazz.getName(), StoryDetails.class);
-    	Scene scene = (Scene) storyDetails.getStore().get(extensionContext.getRequiredTestMethod().getName());
-    	scene.setRunResult("failed");
-    	getStoryDetails(extensionContext).getStore().put(scene.getMethodName(), scene);
-    }
-
-    @Override
-    public void testSuccessful(ExtensionContext extensionContext) {
-    	
-    	Class<?> clazz = extensionContext.getRequiredTestClass();
-    	StoryDetails storyDetails = extensionContext.getStore(NAMESPACE).get(clazz.getName(), StoryDetails.class);
-    	Scene scene = (Scene) storyDetails.getStore().get(extensionContext.getRequiredTestMethod().getName());
-    	scene.setRunResult("succeed");
-    	getStoryDetails(extensionContext).getStore().put(scene.getMethodName(), scene);
-    }
+	public void afterEach(ExtensionContext context) throws Exception {
+		Scene scene = (Scene)getStoryDetails(context).getStore().get(context.getRequiredTestMethod().getName());
+        String key = context.getRequiredTestClass().getName()+"#"+context.getRequiredTestMethod().getName();
+        scene.setKey(key);
+		
+		 // 定义一个EventBus对象，这里的Joker是该对象的id
+	    EventBus eventBus = new EventBus("Scene");
+	    // 向上述EventBus对象中注册一个监听对象   
+	    eventBus.register(new JUnitPlatformRunnerListener());
+	    // 使用EventBus发布一个事件，该事件会给通知到所有注册的监听者
+	    eventBus.post(scene);
+	}
 }

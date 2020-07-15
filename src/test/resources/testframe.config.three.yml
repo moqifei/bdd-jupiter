@@ -1,0 +1,36 @@
+# ##################################################
+# testframe 测试框架文件
+# ##################################################
+
+testframe:
+  pdf:
+    logo: classpath:/images/test-logo.jpg
+    companyName: 世界之光
+    title: 宇宙银河联盟委员会黎明之光号宇宙飞船整体测试报告
+    department: 星际联盟委员会
+    person: 大道无形
+    rootPath: ./target
+    codeType: QRCODE
+    codeEyesFormat:
+    codeData:  dhaiufh343874983
+    password:
+    fileNamePrefix: TTEXT
+    #    isExecuteStateText: true
+    environment: 正式版本
+    version: 0.0.1-SNAPSHOT
+    isUserCodeData: false
+    qrcode:
+      width: 110
+      borderSize: 0
+      padding: 1
+      borderRadius: 0
+      margin: 1
+      masterColor: '#E0CCA8'
+      borderStyle: SOLID
+      codeEyesFormat: DR2_BORDER_C_POINT
+      codeEyesPointColor: '#BC8F8F'
+      logo:
+        path: classpath:/images/test-logo.jpg
+        ratio: 6
+
+
