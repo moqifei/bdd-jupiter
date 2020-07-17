@@ -129,6 +129,19 @@ testframe:
         ratio: 6
 ```  
 报告示例  
-
-
-
+[乌鸦喝水测试报告](https://github.com/moqifei/bdd-jupiter/blob/BRANCH_1.0.1/src/pic/crows-drink-test-report.pdf)
+### 3.1 多个测试类  
+```
+@RunWith(MultipleJunitPlatform.class)
+//@SelectClasses({
+//	AppTest.class,
+//	AppTestTest.class,
+//	TestClassFive.class,
+//	TestAppTest3.class,
+//	NewDemoTest.class
+//})
+@SelectPackages("com.moqifei.bddjupiter.bddjupiter.test")
+@TestFrameConfig(value = "classpath:/testframe.config.two.yml")
+public class TestMultipleJunitPlatform {}
+```  
+两种方式指定测试范围，@SelectClasses注解可配置多个测试类，逗号分开；@SelectPackages注解可配置指定目录下的所有测试类。报告配置文件及生成的测试报告与单个测试类一致，此处不再赘述。
