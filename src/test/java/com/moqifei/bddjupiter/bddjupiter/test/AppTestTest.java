@@ -31,11 +31,9 @@ import net.bytebuddy.asm.Advice.This;
  * Unit test for simple App.
  */
 @Story(name = "故事", description = "一个测试故事")
-@ExtendWith(PDFTestWatcherImpl.class)
-public class AppTestTest extends PDFTestWatcherImpl{
-	public AppTestTest() {
-		setUserConfig("classpath:/user-testframe.config.yml");
-	}
+//@ExtendWith(PDFTestWatcherImpl.class)
+//@TestFrameConfig(value = "classpath:/user-testframe.config.yml")
+public class AppTestTest {
 
 	@ScenarioTest("test")
 	@ScenarioSource(value = AnotherScene.class)
@@ -99,7 +97,6 @@ public class AppTestTest extends PDFTestWatcherImpl{
 	//@Test
 	@ScenarioTest("JSontest")
 	@ScenarioJsonSource(resources = "/dataSet/AppTest.json", instance = StoryDetails.class, key = "StoryDetailsKey")
-	@Disabled
 	public void testJSonScenarioSource(Scene scene) {
 		// Scene scene = new Scene();
 		scene.given("given", () -> {
@@ -120,7 +117,7 @@ public class AppTestTest extends PDFTestWatcherImpl{
 
 	@Test
 	public void fail() {
-		throw new RuntimeException("fail");
+		//throw new RuntimeException("fail");
 
 	}
 

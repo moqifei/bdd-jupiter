@@ -5,6 +5,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.AfterAllCallback;
+import org.junit.jupiter.api.extension.BeforeAllCallback;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 
@@ -18,6 +21,7 @@ import com.moqifei.bdd.jupiter.modle.annotations.ScenarioTest;
 import com.moqifei.bdd.jupiter.modle.annotations.Story;
 import com.moqifei.bdd.jupiter.report.testframe.Explains;
 import com.moqifei.bdd.jupiter.report.testframe.InfoEntity;
+import com.moqifei.bdd.jupiter.report.testframe.TestFrameConfig;
 import com.moqifei.bdd.jupiter.report.util.DateTimeUtils;
 
 import java.lang.reflect.Method;
@@ -30,15 +34,19 @@ import java.util.Optional;
  * Description: TestWatcher抽象测试报告接口 <br>
  */
 @Log4j2
-public abstract class AbstractTestReport implements TestReport {
+public abstract class AbstractTestReport implements TestReport, BeforeEachCallback, BeforeAllCallback, AfterAllCallback {
 
 	private static final Namespace NAMESPACE = Namespace.create(StoryExtension.class);
+
+	/** * 自定义配置文件 */
+	protected static String CONFIG_PATH = null;
+
 	/** 执行数据集 * */
 	private static LinkedList<InfoEntity> infoEntitiesList = new LinkedList<>();
 	// 开始执行时间
-	private static Date startDate;
+	protected static Date startDate;
 	// 测试总开始时间
-	private static Date testStartDate;
+	protected static Date testStartDate;
 	// 执行对象
 	private static TestReport testReport;
 
@@ -52,6 +60,7 @@ public abstract class AbstractTestReport implements TestReport {
 	public static void afters() {
 		for (InfoEntity entity : infoEntitiesList) {
 			log.info(entity);
+			System.out.println("log info");
 		}
 	}
 
@@ -60,6 +69,7 @@ public abstract class AbstractTestReport implements TestReport {
 		// 初始时间
 		startDate = new Date();
 		testStartDate = new Date();
+		System.out.println("beforesAll");
 	}
 
 	public static Integer getAbortedSize() {
@@ -110,11 +120,7 @@ public abstract class AbstractTestReport implements TestReport {
 	public void after() {
 	}
 
-	@BeforeEach
-	@Override
-	public void before() {
-		startDate = new Date();
-	}
+	
 
 	@Override
 	public void testDisabled(ExtensionContext context, Optional<String> reason) {
@@ -123,6 +129,7 @@ public abstract class AbstractTestReport implements TestReport {
 		this.add(new InfoEntity(getClazz(context), getMethod(context), getExplains(context), getStory(context),
 				getScenario(context), getScene(context), InfoEntity.ExecuteState.DISABLED, reason.get(), getRunTime(),
 				getComplete(context)));
+		setUserConfig(context);
 	}
 
 	@Override
@@ -132,6 +139,7 @@ public abstract class AbstractTestReport implements TestReport {
 		this.add(new InfoEntity(getClazz(context), getMethod(context), getExplains(context), getStory(context),
 				getScenario(context), getScene(context), InfoEntity.ExecuteState.SUCCESSFUL, getRemarks(context),
 				getRunTime(), getComplete(context)));
+		setUserConfig(context);
 	}
 
 	@Override
@@ -141,6 +149,7 @@ public abstract class AbstractTestReport implements TestReport {
 		this.add(new InfoEntity(getClazz(context), getMethod(context), getExplains(context), getStory(context),
 				getScenario(context), getScene(context), InfoEntity.ExecuteState.ABORTED, cause.getMessage(),
 				getRunTime(), getComplete(context)));
+		setUserConfig(context);
 	}
 
 	@Override
@@ -150,6 +159,7 @@ public abstract class AbstractTestReport implements TestReport {
 		this.add(new InfoEntity(getClazz(context), getMethod(context), getExplains(context), getStory(context),
 				getScenario(context), getScene(context), InfoEntity.ExecuteState.FAILED, cause.getMessage(),
 				getRunTime(), getComplete(context)));
+		setUserConfig(context);
 	}
 
 	/** 获取测试类 */
@@ -268,5 +278,21 @@ public abstract class AbstractTestReport implements TestReport {
 	/** 获取执行时间 */
 	public String getRunTime() {
 		return DateTimeUtils.TIME_COUNT_SSS.format(startDate, new Date());
+	}
+
+	/**
+	 * 用户自定义 testframe 配置文件
+	 *
+	 * @param path 文件路径
+	 */
+	private void setUserConfig(ExtensionContext context) {
+		if (CONFIG_PATH == null) {
+			Class<?> clazz = context.getRequiredTestClass();
+			TestFrameConfig testFrameConfig = clazz.getAnnotation(TestFrameConfig.class);
+			if(testFrameConfig!=null) {
+				CONFIG_PATH = testFrameConfig.value();
+			}
+		}
+		
 	}
 }
