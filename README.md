@@ -49,4 +49,86 @@ bdd-jupiter支持如下用于配置BDD Style单测用例的Annotations
 ### 2.2. BDD Style Design Ideas
 类图  
 ![Image](https://github.com/moqifei/bdd-jupiter/blob/BRANCH_1.0.1/src/pic/class.jpg)
+## 3. Test Reports
+### 3.1 单个测试类  
+单测例子：
+```
+@Story(name = "乌鸦喝水", description = "聪明的乌鸦利用自己的智慧喝到了水")
+@ExtendWith(PDFTestWatcherImpl.class)
+@TestFrameConfig(value = "classpath:/crows-drink.testframe.config.yml")
+public class NewDemoTest {
+
+	@ScenarioTest(value = "放石子喝水场景")
+	@ScenarioJsonSource(resources = "/dataSet/AppTest.json", instance = StoryDetails.class, key = "StoryDetailsKey")
+	public void drinkTest(Scene scene) {
+		scene.given("乌鸦口渴了", () -> {
+		}).and("乌鸦找到半瓶水", () -> {
+		}).when("乌鸦往瓶子里面丢石头", () -> {
+		}).then("瓶内水面上升", () -> {
+		}).and("乌鸦喝到水了", () -> {
+			assertThat(true, is(true));
+		});
+	}
+	
+	@ScenarioTest(value = "伸脖子喝水场景")
+	@ScenarioJsonSource(resources = "/dataSet/AppTest.json", instance = StoryDetails.class, key = "StoryDetailsKey")
+	public void thirstyTest(Scene scene) {
+		scene.given("乌鸦口渴了", () -> {
+		}).and("乌鸦找到半瓶水", () -> {
+		}).when("乌鸦尝试往瓶子里伸脖子", () -> {
+		}).then("脖子太短，够不睡眠", () -> {
+		}).and("乌鸦继续口渴", () -> {
+			assertThat(false, is(false));
+		});
+	}
+	
+	@Test
+	@Disabled
+	public void disableTest() {
+		
+	}
+	
+	@Test
+	public void failTest() {
+		throw new RuntimeException("乌鸦喝水失败了！");
+	} 
+}
+```  
+crows-drink.testframe.config.yml配置文件
+```
+testframe:
+  pdf:
+    logo: classpath:/images/logo.png
+    companyName: 儿童寓言故事
+    title: 乌鸦喝水测试报告
+    department: 文案部
+    person: 吴邪
+    rootPath: ./target
+    #codeType: QRCODE
+    codeType: BARCODE
+    codeEyesFormat:
+    codeData:  dhaiufh343874983
+    password:
+    fileNamePrefix: TTEXT
+    #    isExecuteStateText: true
+    environment: 正式版本
+    version: 0.0.1-SNAPSHOT
+    isUserCodeData: false
+    qrcode:
+      width: 110
+      borderSize: 0
+      padding: 1
+      borderRadius: 0
+      margin: 1
+      # masterColor: '#1133bb'
+      borderStyle: SOLID
+      # codeEyesFormat: DR2_BORDER_C_POINT
+      codeEyesPointColor: '#BC8F8F'
+      logo:
+        path: classpath:/images/logo.png
+        ratio: 6
+```  
+报告示例  
+
+
 
