@@ -48,5 +48,5 @@ bdd-jupiter支持如下用于配置BDD Style单测用例的Annotations
     
 ### 2.2. BDD Style Design Ideas
 类图  
-
+![Image](https://github.com/moqifei/bdd-jupiter/blob/BRANCH_1.0.1/src/pic/class.jpg)
 
