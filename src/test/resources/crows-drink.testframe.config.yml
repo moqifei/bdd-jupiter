@@ -1,0 +1,37 @@
+# ##################################################
+# testframe 测试框架文件
+# ##################################################
+
+testframe:
+  pdf:
+    logo: classpath:/images/logo.png
+    companyName: 儿童寓言故事
+    title: 乌鸦喝水测试报告
+    department: 文案部
+    person: 吴邪
+    rootPath: ./target
+    #codeType: QRCODE
+    codeType: BARCODE
+    codeEyesFormat:
+    codeData:  dhaiufh343874983
+    password:
+    fileNamePrefix: TTEXT
+    #    isExecuteStateText: true
+    environment: 正式版本
+    version: 0.0.1-SNAPSHOT
+    isUserCodeData: false
+    qrcode:
+      width: 110
+      borderSize: 0
+      padding: 1
+      borderRadius: 0
+      margin: 1
+      # masterColor: '#1133bb'
+      borderStyle: SOLID
+      # codeEyesFormat: DR2_BORDER_C_POINT
+      codeEyesPointColor: '#BC8F8F'
+      logo:
+        path: classpath:/images/logo.png
+        ratio: 6
+
+
